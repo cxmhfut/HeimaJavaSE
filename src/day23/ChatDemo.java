@@ -11,7 +11,7 @@ import java.net.*;
 public class ChatDemo {
     public static void main(String[] args) throws SocketException {
         DatagramSocket sendSocket = new DatagramSocket();
-        String receiverAddressHostName = "192.168.238.255";//广播地址
+        String receiverAddressHostName = "192.168.238.1";//广播地址
         int port = 10002;
 
         new Thread(new Send(sendSocket, receiverAddressHostName, port)).start();
@@ -82,7 +82,7 @@ class Receive implements Runnable {
                 System.out.println(data);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("接收失败");
         } finally {
             ds.close();
         }
