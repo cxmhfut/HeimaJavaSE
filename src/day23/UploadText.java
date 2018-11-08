@@ -8,8 +8,8 @@ class UploadClient {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("192.168.2.220", 10006);
 
-        String filename = "src/day23/IPDemo.java";
-        File file = new File(filename);
+        String fileName = "src/day23/IPDemo.java";
+        File file = new File(fileName);
         if (!file.exists()) {
             System.out.println("文件不存在");
             return;
@@ -40,6 +40,10 @@ class UploadServer {
         ServerSocket serverSocket = new ServerSocket(10006);
 
         Socket socket = serverSocket.accept();
+
+        String ip = socket.getInetAddress().getHostAddress();
+        int port = socket.getPort();
+        System.out.println(ip + ":" + port + "...connect");
 
         String fileName = "server.txt";
         PrintWriter pr = new PrintWriter(new FileWriter(fileName), true);
